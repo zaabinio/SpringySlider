@@ -122,7 +122,7 @@ import Foundation
         var touchPoint = touch.locationInView(self)
         var deltaX: CGFloat = touchPoint.x - previousTouchPoint.x
         self.previousTouchPoint = touchPoint
-        var currentTiltAngle: CGFloat = thumbLayer.valueForKeyPath("transform.rotation.z") as CGFloat
+        var currentTiltAngle: CGFloat = thumbLayer.valueForKeyPath("transform.rotation.z") as! CGFloat
         
         var direction = Direction.Right
         var maxTiltAngle: CGFloat = -self.maxTiltAngle

@@ -19,7 +19,7 @@ class SpringAnimation: CAKeyframeAnimation
     
     override func copyWithZone(zone: NSZone) -> AnyObject
     {
-        var copy = super.copyWithZone(zone) as SpringAnimation
+        var copy = super.copyWithZone(zone) as! SpringAnimation
         
         self.duration = self.durationForEpsilon(0.01)
         copy.values = self.interpolatedValues()
@@ -60,8 +60,9 @@ class SpringAnimation: CAKeyframeAnimation
             else {
                 // overdamped
                 var ω2: CGFloat = sqrt(β * β - ω0 * ω0)
-
-                value = exp(-β * t) * (x0 * cosh(CGFloat(ω2 * t)) + ((β * x0 + v0) /  ω2) * sinh( ω2 * t))
+                
+                var subExpr = x0 * cosh(CGFloat(ω2 * t))
+                value = exp(-β * t) * (subExpr + ((β * x0 + v0) /  ω2) * sinh( ω2 * t))
             }
             
             values.append(self.toValue - value * (self.toValue - self.fromValue))
